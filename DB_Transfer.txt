@@ -1,0 +1,41 @@
+--Load Database to LOCAL
+                (create empty database in postgresql)
+                cd "..\..\Program Files\PostgreSQL\9.2\bin"
+                psql -U postgres -d <Local Database> -f "<Database Path>"
+
+                Example:
+                                psql -U postgres -d hpsProdReplicaMM_530 -f "C:\Users\ssantos\Desktop\AFSMyanmar20160530am.sql"
+
+                                
+--Load Database to SERVER
+                (create empty database in postgresql)
+                access SSH
+                172.16.137.2
+                user:postgres
+                pass:postgres
+
+                cd /opt/PostgreSQL/9.2/bin
+                psql -U postgres -d <Server Database> -f "<Database Path>"
+                password: postgres123
+
+                Example:
+                                psql -U postgres -d hpsProdReplicaMM_211 -f "/opt/PostgreSQL/9.2/bin/MM_Backup/AFSMyanmar20160211am.sql"
+                                postgres123
+
+                                
+--Backup Database Local
+
+                cd "..\..\Program Files\PostgreSQL\9.2\bin"
+                pg_dump -f "<Local Database Path.sql>" -U postgres <Database to Backup>
+
+                Example:
+                                pg_dump -f "C:\Users\jenopena\Downloads\AFSMyanmar20160516DoneMonthly.sql" -U postgres hpsProdReplicaMM_516
+
+                                
+--Backup Database Server
+
+                pg_dump -U postgres <Database Name To Backup> -f "<path/file name>.sql"
+
+                Example:
+                                pg_dump -U msanpedro hpstestdbLA -f "/opt/PostgreSQL/9.2/bin/MM_Backup/DailyCollectionReport/20150303_afterDaily.sql"
+                                pg_dump -U postgres hpsProdReplicaMM_518 -f "/opt/PostgreSQL/9.2/bin/MM_Backup/AFSMyanmar518monthlydone.sql"
